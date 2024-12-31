@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 // Define the TodoItem interface
 export interface TodoItem {
-  id: number;
+  id?: number;
   name: string;
   isComplete: boolean;
 }

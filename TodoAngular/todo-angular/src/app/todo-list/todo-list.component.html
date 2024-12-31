@@ -1,7 +1,21 @@
-<h2>Todo List</h2>
+<!-- Todo List -->
+<h3>Todo List</h3>
+
+<!-- Add Todo Form -->
+<form (ngSubmit)="addTodo()">
+  <input
+    type="text"
+    [(ngModel)]="newTodoTitle"
+    name="title"
+    placeholder="Enter new todo"
+    required
+  />
+  <button type="submit">Add Todo</button>
+</form>
+
 <ul>
   <li *ngFor="let todo of todoItems">
-    <span>{{ todo.name }} - {{ todo.isComplete ? 'Completed' : 'Pending' }}</span>
-    <button (click)="deleteTodo(todo.id)">Delete</button>
+    <input type="checkbox" [checked]="todo.isComplete" (change)="toggleTodoStatus(todo)">
+    <span [class.completed]="todo.isComplete">{{ todo.name }}</span>
   </li>
 </ul>
