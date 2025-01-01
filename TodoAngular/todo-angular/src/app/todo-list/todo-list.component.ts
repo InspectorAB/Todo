@@ -15,6 +15,7 @@ export class TodoListComponent implements OnInit {
 
   todoItems: TodoItem[] = [];
   newTodoTitle: string = '';
+  editingTodo: TodoItem | null = null;
   constructor(private todoService: TodoService) { }
 
   ngOnInit(): void {
@@ -28,12 +29,18 @@ export class TodoListComponent implements OnInit {
     );
   }
 
-  deleteTodo(id: number): void {
-    this.todoService.deleteTodoItem(id).subscribe(() => {
-      this.loadTodos();
-}
-    )
-}
+  deleteTodo(todo: TodoItem): void {
+    if (todo && todo.id !== undefined) {
+      this.todoService.deleteTodoItem(todo.id).subscribe(
+        () => {
+          this.todoItems = this.todoItems.filter((t) => t.id !== todo.id);
+        },
+        (error) => console.error('Error deleting todo', error)
+      );
+    } else {
+      console.error('Todo item or its ID is undefined');
+    }
+  }
   addTodo() {
     if (this.newTodoTitle.trim()) {
       const newTodo = { name: this.newTodoTitle, isComplete: false };
@@ -60,6 +67,33 @@ toggleTodoStatus(todo: TodoItem): void {
     }
   );
 }
+editTodo(todo: TodoItem): void {
+  console.log("Editing");
+  this.editingTodo = { ...todo };
+}
+
+updateTodo(): void {
+  console.log('Updating todo:', this.editingTodo);
+  if (this.editingTodo) {
+    this.todoService.updateTodoItem(this.editingTodo).subscribe(
+      (updatedTodo) => {
+        console.log('Updated todo:', updatedTodo);
+        const index = this.todoItems.findIndex((t) => t.id === updatedTodo.id);
+        if (index !== -1) {
+          this.todoItems[index] = updatedTodo;
+        }
+        this.editingTodo = null;
+      },
+      (error) => console.error('Error updating todo', error)
+    );
+  }
+}
+
+cancelEdit(): void {
+  console.log("Cancel edit");
+  this.editingTodo = null;
+}
+
 }
 
 

@@ -72,7 +72,7 @@ namespace TodoApi.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(todoItem);
         }
 
         [HttpDelete("{id}")]

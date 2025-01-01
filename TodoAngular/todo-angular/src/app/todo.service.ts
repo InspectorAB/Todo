@@ -35,7 +35,8 @@ export class TodoService {
 
   // Update an existing todo item
   updateTodoItem(todo: TodoItem): Observable<TodoItem> {
-    return this.http.put<TodoItem>(`${this.apiUrl}/${todo.id}`, todo);
+    const url = `${this.apiUrl}/${todo.id}`;
+    return this.http.put<TodoItem>(url, todo);
   }
 
   // Delete a todo item

@@ -17,5 +17,13 @@
   <li *ngFor="let todo of todoItems">
     <input type="checkbox" [checked]="todo.isComplete" (change)="toggleTodoStatus(todo)">
     <span [class.completed]="todo.isComplete">{{ todo.name }}</span>
+    <button (click)="editTodo(todo)">Edit</button>
+    <button (click)="deleteTodo(todo)">Delete</button>
   </li>
 </ul>
+
+<div *ngIf="editingTodo">
+  <input [(ngModel)]="editingTodo.name" placeholder="Edit todo">
+  <button (click)="updateTodo()">Update</button>
+  <button (click)="cancelEdit()">Cancel</button>
+</div>
