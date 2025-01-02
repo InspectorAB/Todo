@@ -50,7 +50,8 @@ The API should now be running at https://localhost:7121.
 Frontend (TodoAngular)
 
  1. Navigate to the frontend directory:
-    cd TodoAngular
+
+    cd TodoAngular
 
  2. Install npm dependencies:
 
