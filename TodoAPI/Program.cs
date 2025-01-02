@@ -18,6 +18,7 @@ builder.Services.AddDbContext<TodoContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.WebHost.UseUrls("http://localhost:5000");
+//builder.WebHost.UseUrls("http://0.0.0.0:80"); 
 
 var app = builder.Build();
 app.UseCors("AllowAngularApp");
