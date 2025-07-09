@@ -21,6 +21,7 @@ namespace TodoApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
+            // returns todo list of items.
             return await _context.TodoItems.ToListAsync();
         }
 
